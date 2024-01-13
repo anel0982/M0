@@ -1,0 +1,1047 @@
+local ScreenGui1 = Instance.new("ScreenGui")
+local ImageButton1 = Instance.new("ImageButton")
+local UICorner = Instance.new("UICorner")
+
+ScreenGui1.Name = "ImageButton"
+ScreenGui1.Parent = game.CoreGui
+ScreenGui1.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+ImageButton1.Parent = ScreenGui1
+ImageButton1.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ImageButton1.BorderSizePixel = 0
+ImageButton1.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
+ImageButton1.Size = UDim2.new(0, 50, 0, 50)
+ImageButton1.Draggable = true
+ImageButton1.Image = "rbxassetid://15935972897"
+ImageButton1.MouseButton1Down:connect(function()
+  game:GetService("VirtualInputManager"):SendKeyEvent(true,"LeftControl", false,game)
+  game:GetService("VirtualInputManager"):SendKeyEvent(false,"LeftControl", false,game)
+end)
+
+UICorner.Parent = ImageButton1
+
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+
+local Window = Fluent:CreateWindow({
+    Title = "Muxus Hub〘Community〙",
+    SubTitle = "by Gawr Uriel",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
+})
+
+--Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
+local Tabs = {
+    Main = Window:AddTab({ Title = "Main", Icon = "" }),
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+}
+
+local Options = Fluent.Options
+
+do
+    Fluent:Notify({
+        Title = "Thông báo !!!",
+        Content = "Script được tạo ra bởi Uriel Hub và Uriel Hub làm cho Muxus Hub",
+        SubContent = "SubContent", -- Optional
+        Duration = 5 -- Set to nil to make the notification not disappear
+    })
+
+local Noclip = nil
+local Clip = nil
+ 
+function noclip()
+ Clip = false
+ local function Nocl()
+  if Clip == false and game.Players.LocalPlayer.Character ~= nil then
+   for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+    if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
+     v.CanCollide = false
+    end
+   end
+  end
+  wait(0.21) -- basic optimization
+ end
+ Noclip = game:GetService('RunService').Stepped:Connect(Nocl)
+end
+ 
+function clip()
+ if Noclip then Noclip:Disconnect() end
+ Clip = true
+end
+ 
+noclip() -- to toggle noclip() and clip()
+
+    Tabs.Main:AddParagraph({
+        Title = "Script Tool",
+        Content = "Script có fly , gui tp , tăng tốc và nhảy cao ,esp player , hiện tên player , xuyên tường"
+    })
+
+
+
+    Tabs.Main:AddButton({
+        Title = "Fly",
+        Description = "Gui Fly",
+        Callback = function()
+            Window:Dialog({
+                Title = "Thông Báo!!",
+                Content = "Hiện Gui Fly",
+                Buttons = {
+                    {
+                        Title = "Được",
+                        Callback = function()
+                            loadstring(game:HttpGet("https://raw.githubusercontent.com/anel0982/Script-fly/main/Muxus%20Hub"))()
+                        end
+                    },
+                    {
+                        Title = "Đéo",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Main:AddButton({
+        Title = "Gui tp",
+        Description = "Gui Tp",
+        Callback = function()
+            Window:Dialog({
+                Title = "Thông Báo!!",
+                Content = "Hiện Gui Tp",
+                Buttons = {
+                    {
+                        Title = "Được",
+                        Callback = function()
+                            local Gui = Instance.new("ScreenGui")
+local BackGround = Instance.new("Frame")
+local PlayerTextBox = Instance.new("TextBox")
+local ExitGuiButton = Instance.new("TextButton")
+local TeleportButton = Instance.new("ImageButton")
+local FastTeleportButton = Instance.new("TextButton")
+
+
+Gui.Name = "Gui"
+Gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+Gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+Gui.ResetOnSpawn = false
+
+BackGround.Name = "BackGround"
+BackGround.Parent = Gui
+BackGround.Active = true
+BackGround.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+BackGround.BorderColor3 = Color3.fromRGB(27, 42, 53)
+BackGround.BorderSizePixel = 0
+BackGround.Draggable = true
+BackGround.Position = UDim2.new(0.414194375, -35, 0.447971016, -5)
+BackGround.Size = UDim2.new(0, 220, 0, 70)
+BackGround.Active = true
+BackGround.Draggable = true
+
+PlayerTextBox.Name = "PlayerTextBox"
+PlayerTextBox.Parent = BackGround
+PlayerTextBox.BackgroundColor3 = Color3.fromRGB(93, 93, 93)
+PlayerTextBox.BorderColor3 = Color3.fromRGB(38, 38, 38)
+PlayerTextBox.BorderSizePixel = 3
+PlayerTextBox.Position = UDim2.new(0.0606889203, 0, 0.156255662, 0)
+PlayerTextBox.Size = UDim2.new(0, 189, 0, 47)
+PlayerTextBox.ClearTextOnFocus = false
+PlayerTextBox.Font = Enum.Font.JosefinSans
+PlayerTextBox.PlaceholderText = "Player Name"
+PlayerTextBox.Text = ""
+PlayerTextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerTextBox.TextScaled = true
+PlayerTextBox.TextSize = 14.000
+PlayerTextBox.TextWrapped = true
+
+ExitGuiButton.Name = "ExitGuiButton"
+ExitGuiButton.Parent = BackGround
+ExitGuiButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4)
+ExitGuiButton.BorderColor3 = Color3.fromRGB(50, 50, 50)
+ExitGuiButton.BorderSizePixel = 3
+ExitGuiButton.Position = UDim2.new(0.853980601, 0, -0.304931432, 0)
+ExitGuiButton.Size = UDim2.new(0, 21, 0, 21)
+ExitGuiButton.Font = Enum.Font.JosefinSans
+ExitGuiButton.Text = "X"
+ExitGuiButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ExitGuiButton.TextSize = 14.000
+ExitGuiButton.TextWrapped = true
+
+TeleportButton.Name = "TeleportButton"
+TeleportButton.Parent = BackGround
+TeleportButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TeleportButton.BorderColor3 = Color3.fromRGB(50, 50, 50)
+TeleportButton.BorderSizePixel = 3
+TeleportButton.Position = UDim2.new(0.763071358, 0, -0.304931432, 0)
+TeleportButton.Size = UDim2.new(0, 20, 0, 20)
+TeleportButton.Image = "http://www.roblox.com/asset/?id=15963799162"
+
+FastTeleportButton.Name = "FastTeleportButton"
+FastTeleportButton.Parent = BackGround
+FastTeleportButton.BackgroundColor3 = Color3.fromRGB(255, 64, 67)
+FastTeleportButton.BorderColor3 = Color3.fromRGB(50, 50, 50)
+FastTeleportButton.BorderSizePixel = 3
+FastTeleportButton.Position = UDim2.new(0.672162294, 0, -0.304931402, 0)
+FastTeleportButton.Size = UDim2.new(0, 20, 0, 20)
+FastTeleportButton.Font = Enum.Font.SourceSans
+FastTeleportButton.Text = ""
+FastTeleportButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+FastTeleportButton.TextSize = 14.000
+
+--Hide Menu
+local UIS = game:GetService("UserInputService")
+local guiMode = true
+local fastTpMode = false
+local fastWhileMode = false
+
+UIS.InputBegan:Connect(function (UserInput)
+	if UserInput.UserInputType == Enum.UserInputType.Keyboard and UserInput.KeyCode == Enum.KeyCode.Insert then
+		if guiMode == true then
+			Gui.Enabled = false
+			guiMode = false
+		else
+			Gui.Enabled = true
+			guiMode = true
+		end
+	end
+end)
+
+--Teleport
+PlayerTextBox.FocusLost:Connect(function(enter)
+	if enter then
+		local boxText = PlayerTextBox.Text
+		local plr1 = game.Players.LocalPlayer.Character
+		local plr2 = game:GetService("Players"):FindFirstChild(boxText)
+
+		plr1.HumanoidRootPart.CFrame = plr2.Character.HumanoidRootPart.CFrame
+	end
+end)
+
+--Exit Button
+ExitGuiButton.MouseButton1Click:Connect(function()
+	Gui:Destroy()
+end)
+
+--Button Teleport
+TeleportButton.MouseButton1Click:Connect(function()
+	local playerText = PlayerTextBox.Text
+	local p1 = game.Players.LocalPlayer.Character
+	local p2 = game:GetService("Players"):FindFirstChild(playerText)
+
+	p1.HumanoidRootPart.CFrame = p2.Character.HumanoidRootPart.CFrame
+end)
+
+--Fast Teleport
+FastTeleportButton.MouseButton1Click:Connect(function()
+	if fastTpMode == true then
+		FastTeleportButton.BackgroundColor3 = Color3.fromRGB(255, 64, 67)
+		fastTpMode = false
+		if fastTpMode == false then
+			fastWhileMode = false
+		end
+	else
+		FastTeleportButton.BackgroundColor3 = Color3.fromRGB(67, 255, 67)
+		fastTpMode = true
+		if fastTpMode == true then
+			fastWhileMode = true
+			while fastWhileMode == true do
+				wait()
+				local plText = PlayerTextBox.Text
+				local pl1 = game.Players.LocalPlayer.Character
+				local pl2 = game:GetService("Players"):FindFirstChild(plText)
+				
+				pl1.HumanoidRootPart.CFrame = pl2.Character.HumanoidRootPart.CFrame
+			end
+		end
+	end
+end)
+                        end
+                    },
+                    {
+                        Title = "Đéo",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+    Tabs.Main:AddButton({
+        Title = "Esp Player",
+        Description = "Esp Player",
+        Callback = function()
+            Window:Dialog({
+                Title = "Thông Báo!!",
+                Content = "Thấy được tất người chơi",
+                Buttons = {
+                    {
+                        Title = "Được",
+                        Callback = function()
+                                  		 --// Made by Uriel Hub
+--// Locals:
+local workspace = game:GetService("Workspace")
+local player = game:GetService("Players").LocalPlayer
+local camera = workspace.CurrentCamera
+
+--// Settings:
+local on = true -- Use this if your making gui
+
+local Box_Color = Color3.fromRGB(0, 255, 50)
+local Box_Thickness = 1.9
+local Box_Transparency = 1 -- 1 Visible, 0 Not Visible
+
+local Tracers = true
+local Tracer_Color = Color3.fromRGB(0, 255, 50)
+local Tracer_Thickness = 1.9
+local Tracer_Transparency = 1 -- 1 Visible, 0 Not Visible
+
+local Autothickness = false -- Makes screen less encumbered
+
+local Team_Check = false
+local red = Color3.fromRGB(227, 52, 52)
+local green = Color3.fromRGB(88, 217, 24)
+
+local function NewLine()
+    local line = Drawing.new("Line")
+    line.Visible = false
+    line.From = Vector2.new(0, 0)
+    line.To = Vector2.new(1, 1)
+    line.Color = Box_Color
+    line.Thickness = Box_Thickness
+    line.Transparency = Box_Transparency
+    return line
+end
+
+--// Main Function:
+for i, v in pairs(game.Players:GetChildren()) do
+    --// Lines for 3D box (12)
+    local lines = {
+        line1 = NewLine(),
+        line2 = NewLine(),
+        line3 = NewLine(),
+        line4 = NewLine(),
+        line5 = NewLine(),
+        line6 = NewLine(),
+        line7 = NewLine(),
+        line8 = NewLine(),
+        line9 = NewLine(),
+        line10 = NewLine(),
+        line11 = NewLine(),
+        line12 = NewLine(),
+        Tracer = NewLine()
+    }
+
+    lines.Tracer.Color = Tracer_Color
+    lines.Tracer.Thickness = Tracer_Thickness
+    lines.Tracer.Transparency = Tracer_Transparency
+
+    --// Updates ESP (lines) in render loop
+    local function ESP()
+        local connection
+        connection = game:GetService("RunService").RenderStepped:Connect(function()
+            if on and v.Character ~= nil and v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("HumanoidRootPart") ~= nil and v.Name ~= player.Name and v.Character.Humanoid.Health > 0 and v.Character:FindFirstChild("Head") ~= nil then
+                local pos, vis = camera:WorldToViewportPoint(v.Character.HumanoidRootPart.Position)
+                if vis then
+                    local Scale = v.Character.Head.Size.Y/2
+                    local Size = Vector3.new(2, 3, 1.5) * (Scale * 2) -- Change this for different box size
+
+                    local Top1 = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, Size.Y, -Size.Z)).p)
+                    local Top2 = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, Size.Y, Size.Z)).p)
+                    local Top3 = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, Size.Y, Size.Z)).p)
+                    local Top4 = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, Size.Y, -Size.Z)).p)
+
+                    local Bottom1 = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, -Size.Y, -Size.Z)).p)
+                    local Bottom2 = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, -Size.Y, Size.Z)).p)
+                    local Bottom3 = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, -Size.Y, Size.Z)).p)
+                    local Bottom4 = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, -Size.Y, -Size.Z)).p)
+
+                    --// Top:
+                    lines.line1.From = Vector2.new(Top1.X, Top1.Y)
+                    lines.line1.To = Vector2.new(Top2.X, Top2.Y)
+
+                    lines.line2.From = Vector2.new(Top2.X, Top2.Y)
+                    lines.line2.To = Vector2.new(Top3.X, Top3.Y)
+
+                    lines.line3.From = Vector2.new(Top3.X, Top3.Y)
+                    lines.line3.To = Vector2.new(Top4.X, Top4.Y)
+
+                    lines.line4.From = Vector2.new(Top4.X, Top4.Y)
+                    lines.line4.To = Vector2.new(Top1.X, Top1.Y)
+
+                    --// Bottom:
+                    lines.line5.From = Vector2.new(Bottom1.X, Bottom1.Y)
+                    lines.line5.To = Vector2.new(Bottom2.X, Bottom2.Y)
+
+                    lines.line6.From = Vector2.new(Bottom2.X, Bottom2.Y)
+                    lines.line6.To = Vector2.new(Bottom3.X, Bottom3.Y)
+
+                    lines.line7.From = Vector2.new(Bottom3.X, Bottom3.Y)
+                    lines.line7.To = Vector2.new(Bottom4.X, Bottom4.Y)
+
+                    lines.line8.From = Vector2.new(Bottom4.X, Bottom4.Y)
+                    lines.line8.To = Vector2.new(Bottom1.X, Bottom1.Y)
+
+                    --//S ides:
+                    lines.line9.From = Vector2.new(Bottom1.X, Bottom1.Y)
+                    lines.line9.To = Vector2.new(Top1.X, Top1.Y)
+
+                    lines.line10.From = Vector2.new(Bottom2.X, Bottom2.Y)
+                    lines.line10.To = Vector2.new(Top2.X, Top2.Y)
+
+                    lines.line11.From = Vector2.new(Bottom3.X, Bottom3.Y)
+                    lines.line11.To = Vector2.new(Top3.X, Top3.Y)
+
+                    lines.line12.From = Vector2.new(Bottom4.X, Bottom4.Y)
+                    lines.line12.To = Vector2.new(Top4.X, Top4.Y)
+
+                    --// Tracer:
+                    if Tracers then
+                        local trace = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(0, -Size.Y, 0)).p)
+
+                        lines.Tracer.From = Vector2.new(camera.ViewportSize.X/2, camera.ViewportSize.Y)
+                        lines.Tracer.To = Vector2.new(trace.X, trace.Y)
+                    end
+
+                    --// Teamcheck:
+                    if Team_Check then
+                        if v.TeamColor == player.TeamColor then
+                            for u, x in pairs(lines) do
+                                x.Color = green
+                            end
+                        else 
+                            for u, x in pairs(lines) do
+                                x.Color = red
+                            end
+                        end
+                    end
+
+                    --// Autothickness:
+                    if Autothickness then
+                        local distance = (player.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).magnitude
+                        local value = math.clamp(1/distance*100, 0.1, 4) --0.1 is min thickness, 6 is max
+                        for u, x in pairs(lines) do
+                            x.Thickness = value
+                        end
+                    else 
+                        for u, x in pairs(lines) do
+                            x.Thickness = Box_Thickness
+                        end
+                    end
+
+                    for u, x in pairs(lines) do
+                        if x ~= lines.Tracer then
+                            x.Visible = true
+                        end
+                    end
+                    if Tracers then
+                        lines.Tracer.Visible = true
+                    end
+                else 
+                    for u, x in pairs(lines) do
+                        x.Visible = false
+                    end
+                end
+            else 
+                for u, x in pairs(lines) do
+                    x.Visible = false
+                end
+                if game.Players:FindFirstChild(v.Name) == nil then
+                    connection:Disconnect()
+                end
+            end
+        end)
+    end
+    coroutine.wrap(ESP)()
+end
+
+game.Players.PlayerAdded:Connect(function(newplr)
+    --// Lines for 3D box (12)
+    local lines = {
+        line1 = NewLine(),
+        line2 = NewLine(),
+        line3 = NewLine(),
+        line4 = NewLine(),
+        line5 = NewLine(),
+        line6 = NewLine(),
+        line7 = NewLine(),
+        line8 = NewLine(),
+        line9 = NewLine(),
+        line10 = NewLine(),
+        line11 = NewLine(),
+        line12 = NewLine(),
+        Tracer = NewLine()
+    }
+
+    lines.Tracer.Color = Tracer_Color
+    lines.Tracer.Thickness = Tracer_Thickness
+    lines.Tracer.Transparency = Tracer_Transparency
+
+    --// Updates ESP (lines) in render loop
+    local function ESP()
+        local connection
+        connection = game:GetService("RunService").RenderStepped:Connect(function()
+            if on and newplr.Character ~= nil and newplr.Character:FindFirstChild("Humanoid") ~= nil and newplr.Character:FindFirstChild("HumanoidRootPart") ~= nil and newplr.Name ~= player.Name and newplr.Character.Humanoid.Health > 0 and newplr.Character:FindFirstChild("Head") ~= nil then
+                local pos, vis = camera:WorldToViewportPoint(newplr.Character.HumanoidRootPart.Position)
+                if vis then
+                    local Scale = newplr.Character.Head.Size.Y/2
+                    local Size = Vector3.new(2, 3, 1.5) * (Scale * 2) -- Change this for different box size
+
+                    local Top1 = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, Size.Y, -Size.Z)).p)
+                    local Top2 = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, Size.Y, Size.Z)).p)
+                    local Top3 = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, Size.Y, Size.Z)).p)
+                    local Top4 = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, Size.Y, -Size.Z)).p)
+
+                    local Bottom1 = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, -Size.Y, -Size.Z)).p)
+                    local Bottom2 = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, -Size.Y, Size.Z)).p)
+                    local Bottom3 = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, -Size.Y, Size.Z)).p)
+                    local Bottom4 = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, -Size.Y, -Size.Z)).p)
+
+                    --// Top:
+                    lines.line1.From = Vector2.new(Top1.X, Top1.Y)
+                    lines.line1.To = Vector2.new(Top2.X, Top2.Y)
+
+                    lines.line2.From = Vector2.new(Top2.X, Top2.Y)
+                    lines.line2.To = Vector2.new(Top3.X, Top3.Y)
+
+                    lines.line3.From = Vector2.new(Top3.X, Top3.Y)
+                    lines.line3.To = Vector2.new(Top4.X, Top4.Y)
+
+                    lines.line4.From = Vector2.new(Top4.X, Top4.Y)
+                    lines.line4.To = Vector2.new(Top1.X, Top1.Y)
+
+                    --// Bottom:
+                    lines.line5.From = Vector2.new(Bottom1.X, Bottom1.Y)
+                    lines.line5.To = Vector2.new(Bottom2.X, Bottom2.Y)
+
+                    lines.line6.From = Vector2.new(Bottom2.X, Bottom2.Y)
+                    lines.line6.To = Vector2.new(Bottom3.X, Bottom3.Y)
+
+                    lines.line7.From = Vector2.new(Bottom3.X, Bottom3.Y)
+                    lines.line7.To = Vector2.new(Bottom4.X, Bottom4.Y)
+
+                    lines.line8.From = Vector2.new(Bottom4.X, Bottom4.Y)
+                    lines.line8.To = Vector2.new(Bottom1.X, Bottom1.Y)
+
+                    --//S ides:
+                    lines.line9.From = Vector2.new(Bottom1.X, Bottom1.Y)
+                    lines.line9.To = Vector2.new(Top1.X, Top1.Y)
+
+                    lines.line10.From = Vector2.new(Bottom2.X, Bottom2.Y)
+                    lines.line10.To = Vector2.new(Top2.X, Top2.Y)
+
+                    lines.line11.From = Vector2.new(Bottom3.X, Bottom3.Y)
+                    lines.line11.To = Vector2.new(Top3.X, Top3.Y)
+
+                    lines.line12.From = Vector2.new(Bottom4.X, Bottom4.Y)
+                    lines.line12.To = Vector2.new(Top4.X, Top4.Y)
+
+                    --// Tracer:
+                    if Tracers then
+                        local trace = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, -Size.Y, 0)).p)
+                        lines.Tracer.From = Vector2.new(camera.ViewportSize.X/2, camera.ViewportSize.Y)
+                        lines.Tracer.To = Vector2.new(trace.X, trace.Y)
+                    end
+
+                    --// Teamcheck:
+                    if Team_Check then
+                        if newplr.TeamColor == player.TeamColor then
+                            for u, x in pairs(lines) do
+                                x.Color = green
+                            end
+                        else 
+                            for u, x in pairs(lines) do
+                                x.Color = red
+                            end
+                        end
+                    end
+
+                    --// Autothickness:
+                    if Autothickness then
+                        local distance = (player.Character.HumanoidRootPart.Position - newplr.Character.HumanoidRootPart.Position).magnitude
+                        local value = math.clamp(1/distance*100, 0.1, 4) --0.1 is min thickness, 6 is max
+                        for u, x in pairs(lines) do
+                            x.Thickness = value
+                        end
+                    else 
+                        for u, x in pairs(lines) do
+                            x.Thickness = Box_Thickness
+                        end
+                    end
+
+                    for u, x in pairs(lines) do
+                        if x ~= lines.Tracer then
+                            x.Visible = true
+                        end
+                    end
+                    if Tracers then
+                        lines.Tracer.Visible = true
+                    end
+                else 
+                    for u, x in pairs(lines) do
+                        x.Visible = false
+                    end
+                end
+            else 
+                for u, x in pairs(lines) do
+                    x.Visible = false
+                end
+                if game.Players:FindFirstChild(newplr.Name) == nil then
+                    connection:Disconnect()
+                end
+            end
+        end)
+    end
+    coroutine.wrap(ESP)()
+end)
+
+
+
+
+                        end
+                    },
+                    {
+                        Title = "Đéo",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Main:AddButton({
+        Title = "Hiện tên player",
+        Description = "Hiện tên Player",
+        Callback = function()
+            Window:Dialog({
+                Title = "Thông Báo!!",
+                Content = "Thấy được tên người chơi",
+                Buttons = {
+                    {
+                        Title = "Được",
+                        Callback = function()
+                            _G.FriendColor = Color3.fromRGB(0, 0, 255)
+_G.EnemyColor = Color3.fromRGB(255, 0, 0)
+_G.UseTeamColor = true
+
+--------------------------------------------------------------------
+local Holder = Instance.new("Folder", game.CoreGui)
+Holder.Name = "ESP"
+
+local Box = Instance.new("BoxHandleAdornment")
+Box.Name = "nilBox"
+Box.Size = Vector3.new(1, 2, 1)
+Box.Color3 = Color3.new(100 / 255, 100 / 255, 100 / 255)
+Box.Transparency = 0.7
+Box.ZIndex = 0
+Box.AlwaysOnTop = false
+Box.Visible = false
+
+local NameTag = Instance.new("BillboardGui")
+NameTag.Name = "nilNameTag"
+NameTag.Enabled = false
+NameTag.Size = UDim2.new(0, 200, 0, 50)
+NameTag.AlwaysOnTop = true
+NameTag.StudsOffset = Vector3.new(0, 1.8, 0)
+local Tag = Instance.new("TextLabel", NameTag)
+Tag.Name = "Tag"
+Tag.BackgroundTransparency = 1
+Tag.Position = UDim2.new(0, -50, 0, 0)
+Tag.Size = UDim2.new(0, 300, 0, 20)
+Tag.TextSize = 15
+Tag.TextColor3 = Color3.new(100 / 255, 100 / 255, 100 / 255)
+Tag.TextStrokeColor3 = Color3.new(0 / 255, 0 / 255, 0 / 255)
+Tag.TextStrokeTransparency = 0.4
+Tag.Text = "nil"
+Tag.Font = Enum.Font.SourceSansBold
+Tag.TextScaled = false
+
+local LoadCharacter = function(v)
+	repeat wait() until v.Character ~= nil
+	v.Character:WaitForChild("Humanoid")
+	local vHolder = Holder:FindFirstChild(v.Name)
+	vHolder:ClearAllChildren()
+	local b = Box:Clone()
+	b.Name = v.Name .. "Box"
+	b.Adornee = v.Character
+	b.Parent = vHolder
+	local t = NameTag:Clone()
+	t.Name = v.Name .. "NameTag"
+	t.Enabled = true
+	t.Parent = vHolder
+	t.Adornee = v.Character:WaitForChild("Head", 5)
+	if not t.Adornee then
+		return UnloadCharacter(v)
+	end
+	t.Tag.Text = v.Name
+	b.Color3 = Color3.new(v.TeamColor.r, v.TeamColor.g, v.TeamColor.b)
+	t.Tag.TextColor3 = Color3.new(v.TeamColor.r, v.TeamColor.g, v.TeamColor.b)
+	local Update
+	local UpdateNameTag = function()
+		if not pcall(function()
+			v.Character.Humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+			local maxh = math.floor(v.Character.Humanoid.MaxHealth)
+			local h = math.floor(v.Character.Humanoid.Health)
+		end) then
+			Update:Disconnect()
+		end
+	end
+	UpdateNameTag()
+	Update = v.Character.Humanoid.Changed:Connect(UpdateNameTag)
+end
+
+local UnloadCharacter = function(v)
+	local vHolder = Holder:FindFirstChild(v.Name)
+	if vHolder and (vHolder:FindFirstChild(v.Name .. "Box") ~= nil or vHolder:FindFirstChild(v.Name .. "NameTag") ~= nil) then
+		vHolder:ClearAllChildren()
+	end
+end
+
+local LoadPlayer = function(v)
+	local vHolder = Instance.new("Folder", Holder)
+	vHolder.Name = v.Name
+	v.CharacterAdded:Connect(function()
+		pcall(LoadCharacter, v)
+	end)
+	v.CharacterRemoving:Connect(function()
+		pcall(UnloadCharacter, v)
+	end)
+	v.Changed:Connect(function(prop)
+		if prop == "TeamColor" then
+			UnloadCharacter(v)
+			wait()
+			LoadCharacter(v)
+		end
+	end)
+	LoadCharacter(v)
+end
+
+local UnloadPlayer = function(v)
+	UnloadCharacter(v)
+	local vHolder = Holder:FindFirstChild(v.Name)
+	if vHolder then
+		vHolder:Destroy()
+	end
+end
+
+for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+	spawn(function() pcall(LoadPlayer, v) end)
+end
+
+game:GetService("Players").PlayerAdded:Connect(function(v)
+	pcall(LoadPlayer, v)
+end)
+
+game:GetService("Players").PlayerRemoving:Connect(function(v)
+	pcall(UnloadPlayer, v)
+end)
+
+game:GetService("Players").LocalPlayer.NameDisplayDistance = 0
+
+if _G.Reantheajfdfjdgs then
+    return
+end
+
+_G.Reantheajfdfjdgs = ":suifayhgvsdghfsfkajewfrhk321rk213kjrgkhj432rj34f67df"
+
+local players = game:GetService("Players")
+local plr = players.LocalPlayer
+
+function esp(target, color)
+    if target.Character then
+        if not target.Character:FindFirstChild("GetReal") then
+            local highlight = Instance.new("Highlight")
+            highlight.RobloxLocked = true
+            highlight.Name = "GetReal"
+            highlight.Adornee = target.Character
+            highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+            highlight.FillColor = color
+            highlight.Parent = target.Character
+        else
+            target.Character.GetReal.FillColor = color
+        end
+    end
+end
+
+while task.wait() do
+    for i, v in pairs(players:GetPlayers()) do
+        if v ~= plr then
+            esp(v, _G.UseTeamColor and v.TeamColor.Color or ((plr.TeamColor == v.TeamColor) and _G.FriendColor or _G.EnemyColor))
+        end
+    end
+end
+                        end
+                    },
+                    {
+                        Title = "Đéo",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+    
+    Tabs.Main:AddButton({
+        Title = "inf jump",
+        Description = "nhảy vô hạn",
+        Callback = function()
+            Window:Dialog({
+                Title = "Thông báo",
+                Content = "nhảy vô hạn",
+                Buttons = {
+                    {
+                        Title = "Được",
+                        Callback = function()
+                            local InfiniteJumpEnabled = true
+        game:GetService("UserInputService").JumpRequest:connect(function()
+            if InfiniteJumpEnabled then
+                game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+            end
+        end)
+                        end
+                    },
+                    {
+                        Title = "đéo",
+                        Callback = function()
+                            print("Cancel")
+                        end
+                    }
+                }
+            })
+        end
+    })
+    
+    local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "noclip", Default = false })
+
+    Toggle:OnChanged(function(Value)
+          if Value then
+            noclip()
+        else
+            clip()
+        end
+    end)
+
+    Options.MyToggle:SetValue(false)
+    
+    
+    
+    
+    local Slider = Tabs.Main:AddSlider("Slider", {
+        Title = "tăng tốc",
+        Description = "Speed",
+        Default = 2,
+        Min = 50,
+        Max = 5000,
+        Rounding = 1,
+        Callback = function(Value)
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+        end
+    })
+
+    Slider:OnChanged(function(Value)
+        print("Slider changed:", Value)
+    end)
+
+    Slider:SetValue(3)
+
+local Slider = Tabs.Main:AddSlider("Slider", {
+        Title = "tăng độ nhảy",
+        Description = "jump",
+        Default = 2,
+        Min = 50,
+        Max = 5000,
+        Rounding = 1,
+        Callback = function(Value)
+            game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+        end
+    })
+
+    Slider:OnChanged(function(Value)
+        print("Slider changed:", Value)
+    end)
+
+    Slider:SetValue(3)
+
+    local Dropdown = Tabs.Main:AddDropdown("Dropdown", {
+        Title = "Dropdown",
+        Values = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen"},
+        Multi = false,
+        Default = 1,
+    })
+
+    Dropdown:SetValue("four")
+
+    Dropdown:OnChanged(function(Value)
+        print("Dropdown changed:", Value)
+    end)
+
+
+    
+    local MultiDropdown = Tabs.Main:AddDropdown("MultiDropdown", {
+        Title = "Dropdown",
+        Description = "You can select multiple values.",
+        Values = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen"},
+        Multi = true,
+        Default = {"seven", "twelve"},
+    })
+
+    MultiDropdown:SetValue({
+        three = true,
+        five = true,
+        seven = false
+    })
+
+    MultiDropdown:OnChanged(function(Value)
+        local Values = {}
+        for Value, State in next, Value do
+            table.insert(Values, Value)
+        end
+        print("Mutlidropdown changed:", table.concat(Values, ", "))
+    end)
+
+
+
+    local Colorpicker = Tabs.Main:AddColorpicker("Colorpicker", {
+        Title = "Colorpicker",
+        Default = Color3.fromRGB(96, 205, 255)
+    })
+
+    Colorpicker:OnChanged(function()
+        print("Colorpicker changed:", Colorpicker.Value)
+    end)
+    
+    Colorpicker:SetValueRGB(Color3.fromRGB(0, 255, 140))
+
+
+
+    local TColorpicker = Tabs.Main:AddColorpicker("TransparencyColorpicker", {
+        Title = "Colorpicker",
+        Description = "but you can change the transparency.",
+        Transparency = 0,
+        Default = Color3.fromRGB(96, 205, 255)
+    })
+
+    TColorpicker:OnChanged(function()
+        print(
+            "TColorpicker changed:", TColorpicker.Value,
+            "Transparency:", TColorpicker.Transparency
+        )
+    end)
+
+
+
+    local Keybind = Tabs.Main:AddKeybind("Keybind", {
+        Title = "KeyBind",
+        Mode = "Toggle", -- Always, Toggle, Hold
+        Default = "LeftControl", -- String as the name of the keybind (MB1, MB2 for mouse buttons)
+
+        -- Occurs when the keybind is clicked, Value is `true`/`false`
+        Callback = function(Value)
+            print("Keybind clicked!", Value)
+        end,
+
+        -- Occurs when the keybind itself is changed, `New` is a KeyCode Enum OR a UserInputType Enum
+        ChangedCallback = function(New)
+            print("Keybind changed!", New)
+        end
+    })
+
+    -- OnClick is only fired when you press the keybind and the mode is Toggle
+    -- Otherwise, you will have to use Keybind:GetState()
+    Keybind:OnClick(function()
+        print("Keybind clicked:", Keybind:GetState())
+    end)
+
+    Keybind:OnChanged(function()
+        print("Keybind changed:", Keybind.Value)
+    end)
+
+    task.spawn(function()
+        while true do
+            wait(1)
+
+            -- example for checking if a keybind is being pressed
+            local state = Keybind:GetState()
+            if state then
+                print("Keybind is being held down")
+            end
+
+            if Fluent.Unloaded then break end
+        end
+    end)
+
+    Keybind:SetValue("MB2", "Toggle") -- Sets keybind to MB2, mode to Hold
+
+
+    local Input = Tabs.Main:AddInput("Input", {
+        Title = "Input",
+        Default = "Default",
+        Placeholder = "Placeholder",
+        Numeric = false, -- Only allows numbers
+        Finished = false, -- Only calls callback when you press enter
+        Callback = function(Value)
+            print("Input changed:", Value)
+        end
+    })
+
+    Input:OnChanged(function()
+        print("Input updated:", Input.Value)
+    end)
+end
+
+
+-- Addons:
+-- SaveManager (Allows you to have a configuration system)
+-- InterfaceManager (Allows you to have a interface managment system)
+
+-- Hand the library over to our managers
+SaveManager:SetLibrary(Fluent)
+InterfaceManager:SetLibrary(Fluent)
+
+-- Ignore keys that are used by ThemeManager.
+-- (we dont want configs to save themes, do we?)
+SaveManager:IgnoreThemeSettings()
+
+-- You can add indexes of elements the save manager should ignore
+SaveManager:SetIgnoreIndexes({})
+
+-- use case for doing it this way:
+-- a script hub could have themes in a global folder
+-- and game configs in a separate folder per game
+InterfaceManager:SetFolder("FluentScriptHub")
+SaveManager:SetFolder("FluentScriptHub/specific-game")
+
+InterfaceManager:BuildInterfaceSection(Tabs.Settings)
+SaveManager:BuildConfigSection(Tabs.Settings)
+
+
+Window:SelectTab(1)
+
+Fluent:Notify({
+    Title = "Fluent",
+    Content = "The script has been loaded.",
+    Duration = 8
+})
+
+-- You can use the SaveManager:LoadAutoloadConfig() to load a config
+-- which has been marked to be one that auto loads!
+SaveManager:LoadAutoloadConfig()
+
+
+
+
+
+
+
+
+
